@@ -1,0 +1,6 @@
+https://docs.python.org/2/library/json.html
+https://tools.ietf.org/html/rfc6455#section-1.3
+https://tools.ietf.org/html/rfc3986#section-1.1.3
+https://docs.python.org/2.7/library/socket.html
+http://demos.kaazing.com/echo/
+http://api.ocpp.conectaev.com/files/

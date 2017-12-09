@@ -1,0 +1,1 @@
+{"title": "AuthorizeRequest", "required": ["idTag"], "idTag": "123456", "additionalProperties": false, "$schema": "http://json-schema.org/draft-04/schema#", "type": "object", "properties": {"idTag": {"type": "string", "maxLength": 20}}}

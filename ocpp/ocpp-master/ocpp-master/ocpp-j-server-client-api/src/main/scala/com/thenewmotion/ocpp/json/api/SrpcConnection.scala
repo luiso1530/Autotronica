@@ -1,0 +1,33 @@
+package com.thenewmotion.ocpp.json.api
+
+import org.json4s.JValue
+import org.slf4j.LoggerFactory
+import com.thenewmotion.ocpp.json.{TransportMessage, TransportMessageParser}
+
+trait SrpcComponent {
+  trait SrpcConnection {
+    def send(msg: TransportMessage)
+  }
+
+  def srpcConnection: SrpcConnection
+
+  def onSrpcMessage(msg: TransportMessage)
+}
+
+trait DefaultSrpcComponent extends SrpcComponent {
+  this: WebSocketComponent =>
+
+  private[this] val logger = LoggerFactory.getLogger(DefaultSrpcComponent.this.getClass)
+
+  class DefaultSrpcConnection extends SrpcConnection {
+    def send(msg: TransportMessage) {
+      webSocketConnection.send(TransportMessageParser.writeJValue(msg))
+    }
+  }
+
+  def onMessage(jval: JValue) = onSrpcMessage(TransportMessageParser.parse(jval))
+
+  def onError(ex: Throwable) = logger.error("WebSocket error", ex)
+}
+
+
